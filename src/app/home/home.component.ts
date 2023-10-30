@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   catchError,
@@ -9,15 +9,19 @@ import {
 } from 'rxjs/operators';
 import { ArticleService } from '../services/article.service';
 import { LoadingService } from '../services/loader.service';
+import { Subscription } from 'rxjs';
+import { Article } from '../types/Article';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  articles: any[] = [];
+export class HomeComponent implements OnInit, OnDestroy {
+  articles: Article[] = [];
   searchControl: FormControl = new FormControl();
+  articlesSubscription!: Subscription;
+  searchControlSubscription!: Subscription;
 
   constructor(
     private articleService: ArticleService,
@@ -26,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadingService.setLoadingState(true);
-    this.articleService
+    this.articlesSubscription = this.articleService
       .getArticles()
       .pipe(
         catchError((err) => {
@@ -38,7 +42,7 @@ export class HomeComponent implements OnInit {
         this.loadingService.setLoadingState(false);
       });
 
-    this.searchControl.valueChanges
+    this.searchControlSubscription = this.searchControl.valueChanges
       .pipe(
         tap(() => this.loadingService.setLoadingState(true)),
         debounceTime(750),
@@ -51,5 +55,10 @@ export class HomeComponent implements OnInit {
         this.articles = searchResults;
         this.loadingService.setLoadingState(false);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.articlesSubscription?.unsubscribe();
+    this.searchControlSubscription?.unsubscribe();
   }
 }

@@ -13,7 +13,7 @@ export class ArticleService {
   constructor(private http: HttpClient) {}
 
   getArticles(): Observable<Article[]> {
-    return this.http.get<any>(`${this.apiUrl}/posts`).pipe(
+    return this.http.get<Article[]>(`${this.apiUrl}/posts`).pipe(
       catchError((err) => {
         throw new Error(err);
       })
@@ -23,7 +23,7 @@ export class ArticleService {
   searchArticles(keyword: string): Observable<Article[]> {
     console.log({ keyword });
     //Not using keyword to always get results
-    return this.http.get<any>(`${this.apiUrl}/posts`).pipe(
+    return this.http.get<Article[]>(`${this.apiUrl}/posts`).pipe(
       catchError((err) => {
         throw new Error(err);
       })
