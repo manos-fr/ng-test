@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="header">
+    <h1>{{ title }}</h1>
+    <div class="search-container">
+      <input
+        type="text"
+        [formControl]="searchControl"
+        placeholder="{{ searchPlaceholder }}"
+      />
+    </div>
+  </div>
+  <ul class="article-list">
+    <li *ngFor="let article of articles">
+      <div class="article-card">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.body }}</p>
+      </div>
+    </li>
+  </ul>
+</div>
