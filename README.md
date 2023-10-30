@@ -1,5 +1,15 @@
 # AngularTest
 
+- ## Run locally
+
+- Download or clone the repo
+- Go into the directory
+- You should already have Node.js installed
+- Install the code dependencies with npm install
+- ng serve to run locally
+
+in browser: http://localhost:4201
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.
 
 ## Development server
