@@ -8,7 +8,7 @@
 - Install the code dependencies with npm install
 - ng serve to run locally
 
-in browser: http://localhost:4201
+in browser: http://localhost:4200
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.
 
