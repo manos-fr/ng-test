@@ -9,7 +9,7 @@ import { Article } from '../types/Article';
 })
 export class ArticleListComponent {
   @Input() title: string = '';
-  @Input() articles: Article[] = []; // Assuming 'articles' is an array of article objects
+  @Input() articles: Article[] = [];
   @Input()
   searchControl!: FormControl;
   @Input() searchPlaceholder: string = '';

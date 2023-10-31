@@ -26,10 +26,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private articleService: ArticleService,
     private loadingService: LoadingService
-  ) {}
+  ) {
+    this.loadingService.setLoadingState(true);
+  }
 
   ngOnInit() {
-    this.loadingService.setLoadingState(true);
     this.articlesSubscription = this.articleService
       .getArticles()
       .pipe(
